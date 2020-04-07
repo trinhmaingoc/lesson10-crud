@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b1feb430afafec9d57c43e04b1c76218",
+    "revision": "77fa4ded88b614757e10b954beceb9d2",
     "url": "/lesson10-crud/index.html"
   },
   {
-    "revision": "48ed91931521d47efe47",
+    "revision": "7c0125629fb36963f860",
     "url": "/lesson10-crud/static/css/main.513c6d7d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lesson10-crud/static/js/2.be7f6a6e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "48ed91931521d47efe47",
-    "url": "/lesson10-crud/static/js/main.3c45f0f2.chunk.js"
+    "revision": "7c0125629fb36963f860",
+    "url": "/lesson10-crud/static/js/main.8474924b.chunk.js"
   },
   {
     "revision": "2b4413d94a6dfb5e6fb7",
