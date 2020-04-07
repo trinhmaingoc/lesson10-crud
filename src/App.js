@@ -9,7 +9,8 @@ export class App extends Component {
     super(props)
   
     this.state = {
-       tasks: []
+       tasks: [],
+       isDisplayForm: false,
     }
   }
 
@@ -52,9 +53,16 @@ export class App extends Component {
   generateID(){
     return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
   }
+
+  onDisplayForm = () => {
+    this.setState({
+      isDisplayForm: !this.state.isDisplayForm,
+    })
+  }
   
   render() {
-    const { tasks } = this.state;
+    const { tasks, isDisplayForm } = this.state;
+    const elmTaskForm = isDisplayForm ? <TaskForm /> : '';
     return (
       <div className="container-fluid">
         <div className="text-center">
@@ -62,11 +70,16 @@ export class App extends Component {
         </div>
 
         <div className="row">
-          <TaskForm />
+          {elmTaskForm}
 
-          <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-            <button type="button" className="btn btn-primary">
-              <span className="fa fa-plus mr-5"></span>Thêm Công Việc
+          <div className={isDisplayForm ? "col-xs-12 col-sm-8 col-md-8 col-lg-8" : "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
+            <button 
+              type="button" 
+              className="btn btn-primary"
+              onClick={this.onDisplayForm}
+            >
+              <span className="fa fa-plus mr-5"></span>
+              Thêm Công Việc
             </button>
             <button 
               type="button" 

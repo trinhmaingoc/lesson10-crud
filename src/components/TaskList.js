@@ -12,7 +12,7 @@ export class TaskList extends Component {
       />
     ))
     return (
-      <div className="row mt-15">
+      <div className="row mt-15 tasklist">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
           <table className="table table-bordered table-hover text-nowrap">
             <thead>
