@@ -10,7 +10,7 @@ export class App extends Component {
         </div>
 
         <div className="row">
-          <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             {/* Form */}
             <div className="panel panel-warning">
               <div className="panel-heading">
@@ -52,14 +52,14 @@ export class App extends Component {
             </div>
           </div>
 
-          <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+          <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
             <button type="button" className="btn btn-primary">
               <span className="fa fa-plus mr-5"></span>Thêm Công Việc
             </button>
             {/* Search - Sort */}
             <div className="row mt-15">
               {/* Search */}
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div className="input-group">
                   <input
                     name="keyword"
@@ -75,7 +75,7 @@ export class App extends Component {
                 </div>
               </div>
               {/* Sort */}
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div className="dropdown">
                   <button
                     type="button"
