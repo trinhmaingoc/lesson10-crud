@@ -57,9 +57,9 @@ export class App extends Component {
               <span className="fa fa-plus mr-5"></span>Thêm Công Việc
             </button>
             {/* Search - Sort */}
-            <div className="row mt-15">
+            <div className="row">
               {/* Search */}
-              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 mt-15">
                 <div className="input-group">
                   <input
                     name="keyword"
@@ -75,7 +75,7 @@ export class App extends Component {
                 </div>
               </div>
               {/* Sort */}
-              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 mt-15">
                 <div className="dropdown">
                   <button
                     type="button"
