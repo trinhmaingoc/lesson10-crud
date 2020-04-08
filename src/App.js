@@ -59,10 +59,16 @@ export class App extends Component {
       isDisplayForm: !this.state.isDisplayForm,
     })
   }
+
+  onCloseForm = () => {
+    this.setState({
+      isDisplayForm: false,
+    })
+  }
   
   render() {
     const { tasks, isDisplayForm } = this.state;
-    const elmTaskForm = isDisplayForm ? <TaskForm /> : '';
+    const elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm} /> : '';
     return (
       <div className="container-fluid">
         <div className="text-center">
