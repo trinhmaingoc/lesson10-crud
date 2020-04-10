@@ -65,10 +65,25 @@ export class App extends Component {
       isDisplayForm: false,
     })
   }
+
+  onSubmit = (data) => {
+    const task = {
+      id: this.generateID(),
+      name: data.name,
+      status: data.status,
+    }
+    console.log(task);
+    
+  }
   
   render() {
     const { tasks, isDisplayForm } = this.state;
-    const elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm} /> : '';
+    const elmTaskForm = isDisplayForm ? 
+      <TaskForm 
+        onCloseForm={this.onCloseForm}
+        onSubmit={this.onSubmit}
+      /> 
+      : '';
     return (
       <div className="container-fluid">
         <div className="text-center">
