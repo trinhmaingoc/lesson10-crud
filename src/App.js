@@ -67,13 +67,13 @@ export class App extends Component {
   }
 
   onSubmit = (data) => {
-    const task = {
-      id: this.generateID(),
-      name: data.name,
-      status: data.status,
-    }
-    console.log(task);
-    
+    const { tasks } = this.state;
+    data.id = this.generateID();
+    tasks.push(data);
+    this.setState({
+      tasks: tasks,
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
   
   render() {

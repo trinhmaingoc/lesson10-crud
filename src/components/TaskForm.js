@@ -6,7 +6,7 @@ export class TaskForm extends Component {
   
     this.state = {
        name: '',
-       status: true,
+       status: false,
     }
   }
   
@@ -66,8 +66,8 @@ export class TaskForm extends Component {
                   value={status}
                   onChange={this.onChange}
                 >
-                  <option value={false}>Kích Hoạt</option>
-                  <option value={true}>Ẩn</option>
+                  <option value={true}>Kích Hoạt</option>
+                  <option value={false}>Ẩn</option>
                 </select>
               </div>
               <div className="text-center">
