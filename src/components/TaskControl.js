@@ -11,7 +11,9 @@ export class Control extends Component {
           onSearch={this.props.onSearch}
         />
         {/* Sort */}
-        <TaskControlSort />
+        <TaskControlSort
+          onSort={this.props.onSort}
+        />
       </div>
     )
   }

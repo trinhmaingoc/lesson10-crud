@@ -17,6 +17,10 @@ export class App extends Component {
         status: -1
       },
       keyword: '',
+      sort: {
+        by: '',
+        value: 1
+      }
     }
   }
 
@@ -165,8 +169,17 @@ export class App extends Component {
     })
   };
 
+  onSort = (sortBy, sortValue) => {
+    this.setState({
+      sort: {
+        by: sortBy,
+        value: sortValue
+      }
+    })
+  }
+
   render() {
-    let { tasks, isDisplayForm, taskEditting, filter, keyword } = this.state;
+    let { tasks, isDisplayForm, taskEditting, filter, keyword, sort } = this.state;
     if (filter) {
       if (filter.name) {
         tasks = tasks.filter((task) => {
@@ -184,6 +197,20 @@ export class App extends Component {
       tasks = tasks.filter((task) => {
         return task.name.toLowerCase().indexOf(keyword) !== -1;
       });
+    };
+
+    if (sort.by==='name') {
+      tasks.sort((a, b) => {
+        if (a.name > b.name) return sort.value;
+        else if (a.name < b.name) return -sort.value;
+        else return 0;
+      })
+    } else {
+      tasks.sort((a, b) => {
+        if (a.status > b.status) return sort.value;
+        else if (a.status < b.status) return -sort.value;
+        else return 0;
+      })
     }
 
     const elmTaskForm = isDisplayForm ?
@@ -221,6 +248,7 @@ export class App extends Component {
             {/* Search - Sort */}
             <TaskControl 
               onSearch={this.onSearch}
+              onSort={this.onSort}
             />
             {/* List */}
             <TaskList
