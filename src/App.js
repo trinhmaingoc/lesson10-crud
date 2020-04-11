@@ -11,6 +11,7 @@ export class App extends Component {
     this.state = {
       tasks: [],
       isDisplayForm: false,
+      taskEditting: null,
     }
   }
 
@@ -54,22 +55,42 @@ export class App extends Component {
     return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
   }
 
-  onDisplayForm = () => {
-    this.setState({
-      isDisplayForm: !this.state.isDisplayForm,
-    })
+  onToggleForm = () => {
+    if (this.state.isDisplayForm && this.state.taskEditting !== null) {
+      this.setState({
+        isDisplayForm: true,
+        taskEditting: null
+      })
+    } else {
+      this.setState({
+        isDisplayForm: !this.state.isDisplayForm,
+        taskEditting: null,
+      })
+    }
   }
 
   onCloseForm = () => {
     this.setState({
       isDisplayForm: false,
+      taskEditting: null,
+    })
+  }
+  
+  onOpenForm = () => {
+    this.setState({
+      isDisplayForm: true,
     })
   }
 
   onSubmit = (data) => {
     const { tasks } = this.state;
-    data.id = this.generateID();
-    tasks.push(data);
+    if (data.id) {
+      const index = this.findIndex(data.id);
+      tasks[index] = data;
+    } else {
+      data.id = this.generateID();
+      tasks.push(data);
+    }
     this.setState({
       tasks: tasks,
     });
@@ -112,12 +133,23 @@ export class App extends Component {
     }
   }
 
+  onUpdateItem = (id) => {
+    const { tasks } = this.state;
+    const index = this.findIndex(id);
+    const taskEditting = tasks[index];
+    this.setState({
+      taskEditting: taskEditting,
+    });
+    this.onOpenForm();
+  }
+
   render() {
-    const { tasks, isDisplayForm } = this.state;
+    const { tasks, isDisplayForm, taskEditting } = this.state;
     const elmTaskForm = isDisplayForm ?
       <TaskForm
         onCloseForm={this.onCloseForm}
         onSubmit={this.onSubmit}
+        task={taskEditting}
       />
       : '';
     return (
@@ -133,7 +165,7 @@ export class App extends Component {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={this.onDisplayForm}
+              onClick={this.onToggleForm}
             >
               <span className="fa fa-plus mr-5"></span>
               Thêm Công Việc
@@ -152,6 +184,7 @@ export class App extends Component {
               tasks={tasks}
               onUpdateStatus={this.onUpdateStatus}
               onDeleteItem={this.onDeleteItem}
+              onUpdateItem={this.onUpdateItem}
             />
           </div>
 

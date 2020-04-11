@@ -12,6 +12,7 @@ export class TaskList extends Component {
         index={index}
         onUpdateStatus={this.props.onUpdateStatus}
         onDeleteItem={this.props.onDeleteItem}
+        onUpdateItem={this.props.onUpdateItem}
       />
     ))
     return (

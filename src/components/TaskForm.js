@@ -5,8 +5,33 @@ export class TaskForm extends Component {
     super(props)
   
     this.state = {
-       name: '',
-       status: false,
+      id: '',
+      name: '',
+      status: false,
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.task) {
+      this.setState({
+        id: this.props.task.id,
+        name: this.props.task.name,
+        status: this.props.task.status
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.task !== this.props.task) {
+      if (this.props.task) {
+        this.setState({
+          id: this.props.task.id,
+          name: this.props.task.name,
+          status: this.props.task.status,
+        })
+      } else {
+        this.onClear();
+      }
     }
   }
   
@@ -35,24 +60,25 @@ export class TaskForm extends Component {
 
   onClear = () => {
     this.setState({
+      id: '',
       name: '',
       status: false,
     })
   }
 
   render() {
-    const { name, status } = this.state;
+    const { id, name, status } = this.state;
     return (
       <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
         {/* Form */}
         <div className="panel panel-warning">
           <div className="panel-heading">
             <h3 className="panel-title">
-              Thêm Công Việc
-                <span 
-                className="fa fa-times-circle text-right"
-                onClick={this.onCloseForm}
-                ></span>
+              {id ? "Cập nhật công việc" : "Thêm Công Việc"}
+              <span 
+              className="fa fa-times-circle text-right"
+              onClick={this.onCloseForm}
+              ></span>
             </h3>
           </div>
           <div className="panel-body">
