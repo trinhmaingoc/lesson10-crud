@@ -15,7 +15,8 @@ export class App extends Component {
       filter: {
         name: '',
         status: -1
-      }
+      },
+      keyword: '',
     }
   }
 
@@ -158,8 +159,14 @@ export class App extends Component {
     });
   }
 
+  onSearch = (keyword) => {
+    this.setState({
+      keyword: keyword.toLowerCase(),
+    })
+  };
+
   render() {
-    let { tasks, isDisplayForm, taskEditting, filter } = this.state;
+    let { tasks, isDisplayForm, taskEditting, filter, keyword } = this.state;
     if (filter) {
       if (filter.name) {
         tasks = tasks.filter((task) => {
@@ -171,7 +178,14 @@ export class App extends Component {
           return task.status === (filter.status === 0 ? false : true);
         })
       }
+    };
+    
+    if (keyword) {
+      tasks = tasks.filter((task) => {
+        return task.name.toLowerCase().indexOf(keyword) !== -1;
+      });
     }
+
     const elmTaskForm = isDisplayForm ?
       <TaskForm
         onCloseForm={this.onCloseForm}
@@ -205,7 +219,9 @@ export class App extends Component {
               Generate Data
             </button> */}
             {/* Search - Sort */}
-            <Control />
+            <Control 
+              onSearch={this.onSearch}
+            />
             {/* List */}
             <TaskList
               tasks={tasks}
