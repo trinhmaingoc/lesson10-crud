@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TaskForm from './components/TaskForm';
-import Control from './components/Control';
+import TaskControl from './components/TaskControl';
 import TaskList from './components/TaskList';
 
 export class App extends Component {
@@ -219,7 +219,7 @@ export class App extends Component {
               Generate Data
             </button> */}
             {/* Search - Sort */}
-            <Control 
+            <TaskControl 
               onSearch={this.onSearch}
             />
             {/* List */}
