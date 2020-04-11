@@ -19,7 +19,7 @@ export class TaskForm extends Component {
     const name = target.name;
     let value = target.type === 'checkbox' ? target.checked : target.value;
     if (name === "status") {
-      value = target.value === "true" || target.value === true ? true : false;
+      value = target.value === "true" | target.value === true ? true : false;
     }
     this.setState({
       [name]: value,
@@ -28,7 +28,16 @@ export class TaskForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state);
+    this.onClear();
+    this.onCloseForm();
+  }
+
+  onClear = () => {
+    this.setState({
+      name: '',
+      status: false,
+    })
   }
 
   render() {
@@ -66,15 +75,19 @@ export class TaskForm extends Component {
                   value={status}
                   onChange={this.onChange}
                 >
-                  <option value={true}>Kích Hoạt</option>
                   <option value={false}>Ẩn</option>
+                  <option value={true}>Kích Hoạt</option>
                 </select>
               </div>
               <div className="text-center">
                 <button type="submit" className="btn btn-warning">
                   <span className="fa fa-plus mr-5" ></span>Lưu Lại
                     </button> &nbsp;
-                    <button type="reset" className="btn btn-danger">
+                    <button 
+                      type="reset" 
+                      className="btn btn-danger"
+                      onClick={this.onClear}
+                    >
                   <span className="fa fa-close mr-5" ></span>Hủy Bỏ
                     </button>
               </div>

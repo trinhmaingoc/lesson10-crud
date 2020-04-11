@@ -22,29 +22,29 @@ export class App extends Component {
     };
   }
 
-  onGenerateData = () => {
-    const tasks = [
-      {
-        id: this.generateID(),
-        name: 'Học lập trình',
-        status: true,
-      },
-      {
-        id: this.generateID(),
-        name: 'Đi bơi',
-        status: false,
-      },
-      {
-        id: this.generateID(),
-        name: 'Ngủ',
-        status: true,
-      },
-    ];
-    this.setState({
-      tasks: tasks,
-    });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
+  // onGenerateData = () => {
+  //   const tasks = [
+  //     {
+  //       id: this.generateID(),
+  //       name: 'Học lập trình',
+  //       status: true,
+  //     },
+  //     {
+  //       id: this.generateID(),
+  //       name: 'Đi bơi',
+  //       status: false,
+  //     },
+  //     {
+  //       id: this.generateID(),
+  //       name: 'Ngủ',
+  //       status: true,
+  //     },
+  //   ];
+  //   this.setState({
+  //     tasks: tasks,
+  //   });
+  //   localStorage.setItem('tasks', JSON.stringify(tasks));
+  // }
 
   s4(){
     return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
@@ -102,13 +102,13 @@ export class App extends Component {
               <span className="fa fa-plus mr-5"></span>
               Thêm Công Việc
             </button>
-            <button 
+            {/* <button 
               type="button" 
               className="btn btn-danger ml-5"
               onClick={this.onGenerateData}
             >
               Generate Data
-            </button>
+            </button> */}
             {/* Search - Sort */}
             <Control />
             {/* List */}
