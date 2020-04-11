@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TaskItem from './TaskItem'
 
 export class TaskList extends Component {
+
   render() {
     const { tasks } = this.props;
     const elmTasks = tasks.map((task, index) => (
@@ -9,6 +10,7 @@ export class TaskList extends Component {
         key={index}
         task={task}
         index={index}
+        onUpdateStatus={this.props.onUpdateStatus}
       />
     ))
     return (

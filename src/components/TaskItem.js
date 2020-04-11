@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
 export class TaskItem extends Component {
+  
+  onUpdateStatus = () => {
+    this.props.onUpdateStatus(this.props.task.id)
+  }
+
   render() {
     const { task, index } = this.props;
     return (
@@ -9,7 +14,8 @@ export class TaskItem extends Component {
         <td> { task.name } </td>
         <td className="text-center">
           <span 
-            className={task.status ? "label label-danger" : "label label-success"}
+            className={task.status ? "label label-danger status" : "label label-success status"}
+            onClick={this.onUpdateStatus}
           >
             { task.status ? "Kích Hoạt" : "Ẩn" }
           </span>
