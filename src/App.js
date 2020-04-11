@@ -3,7 +3,7 @@ import './App.css';
 import TaskForm from './components/TaskForm';
 import TaskControl from './components/TaskControl';
 import TaskList from './components/TaskList';
-import { findIndex, filter } from 'lodash'; // import _ if get all libratory
+import { findIndex } from 'lodash'; // import _ if get all libratory
 
 export class App extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export class App extends Component {
       tasks: [],
       isDisplayForm: false,
       taskEditting: null,
-      Filter: {
+      filter: {
         name: '',
         status: -1
       },
@@ -168,7 +168,7 @@ export class App extends Component {
   onFilter = (filterName, filterStatus) => {
     filterStatus = parseInt(filterStatus, 10);
     this.setState({
-      Filter: {
+      filter: {
         name: filterName,
         status: filterStatus
       },
@@ -191,25 +191,25 @@ export class App extends Component {
   }
 
   render() {
-    let { tasks, isDisplayForm, taskEditting, Filter, keyword, sort } = this.state;
+    let { tasks, isDisplayForm, taskEditting, filter, keyword, sort } = this.state;
 
-    // tasks = tasks.filter((task) => {
-      // return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
-    // });
-
-    tasks = filter(tasks, (task) => {
+    tasks = tasks.filter((task) => {
       return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
-    })
+    });
 
-    if (Filter) {
-      if (Filter.name) {
-        tasks = tasks.Filter((task) => {
-          return task.name.toLowerCase().indexOf(Filter.name.toLowerCase()) !== -1;
+    // tasks = filter(tasks, (task) => {
+    //   return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+    // })
+
+    if (filter) {
+      if (filter.name) {
+        tasks = tasks.filter((task) => {
+          return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1;
         })
       }
-      if (Filter.status !== -1) {
-        tasks = tasks.Filter((task) => {
-          return task.status === (Filter.status === 0 ? false : true);
+      if (filter.status !== -1) {
+        tasks = tasks.filter((task) => {
+          return task.status === (filter.status === 0 ? false : true);
         })
       }
     };
