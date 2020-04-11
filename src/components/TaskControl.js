@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import TaskSearch from './TaskSearch';
-import TaskSort from './TaskSort';
+import TaskControlSearch from './TaskControlSearch';
+import TaskControlSort from './TaskControlSort';
 
 export class Control extends Component {
   render() {
     return (
       <div className="row">
         {/* Search */}
-        <TaskSearch 
+        <TaskControlSearch 
           onSearch={this.props.onSearch}
         />
         {/* Sort */}
-        <TaskSort />
+        <TaskControlSort />
       </div>
     )
   }
