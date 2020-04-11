@@ -12,6 +12,10 @@ export class App extends Component {
       tasks: [],
       isDisplayForm: false,
       taskEditting: null,
+      filter: {
+        name: '',
+        status: -1
+      }
     }
   }
 
@@ -143,8 +147,31 @@ export class App extends Component {
     this.onOpenForm();
   }
 
+  onFilter = (filterName, filterStatus) => {
+    filterName = filterName.toLowerCase();
+    filterStatus = parseInt(filterStatus, 10);
+    this.setState({
+      filter: {
+        name: filterName,
+        status: filterStatus
+      },
+    });
+  }
+
   render() {
-    const { tasks, isDisplayForm, taskEditting } = this.state;
+    let { tasks, isDisplayForm, taskEditting, filter } = this.state;
+    if (filter) {
+      if (filter.name) {
+        tasks = tasks.filter((task) => {
+          return task.name.toLowerCase().indexOf(filter.name) !== -1;
+        })
+      }
+      if (filter.status !== -1) {
+        tasks = tasks.filter((task) => {
+          return task.status === (filter.status === 0 ? false : true);
+        })
+      }
+    }
     const elmTaskForm = isDisplayForm ?
       <TaskForm
         onCloseForm={this.onCloseForm}
@@ -185,6 +212,7 @@ export class App extends Component {
               onUpdateStatus={this.onUpdateStatus}
               onDeleteItem={this.onDeleteItem}
               onUpdateItem={this.onUpdateItem}
+              onFilter={this.onFilter}
             />
           </div>
 
