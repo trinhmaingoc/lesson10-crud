@@ -3,6 +3,7 @@ import './App.css';
 import TaskForm from './components/TaskForm';
 import TaskControl from './components/TaskControl';
 import TaskList from './components/TaskList';
+import { findIndex, filter } from 'lodash'; // import _ if get all libratory
 
 export class App extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export class App extends Component {
       tasks: [],
       isDisplayForm: false,
       taskEditting: null,
-      filter: {
+      Filter: {
         name: '',
         status: -1
       },
@@ -94,7 +95,10 @@ export class App extends Component {
   onSubmit = (data) => {
     const { tasks } = this.state;
     if (data.id) {
-      const index = this.findIndex(data.id);
+      // const index = this.findIndex(data.id);
+      const index = findIndex(tasks, (task) => {
+        return task.id === data.id;
+      });
       tasks[index] = data;
     } else {
       data.id = this.generateID();
@@ -108,7 +112,10 @@ export class App extends Component {
 
   onUpdateStatus = (id) => {
     const { tasks } = this.state;
-    const index = this.findIndex(id);
+    // const index = this.findIndex(id);
+    const index = findIndex(tasks, (task) => {
+      return task.id === id;
+    });
     if (index !== -1) {
       tasks[index].status = !tasks[index].status;
       this.setState({
@@ -118,20 +125,23 @@ export class App extends Component {
     };
   }
 
-  findIndex = (id) => {
-    const { tasks } = this.state;
-    let result = -1;
-    tasks.forEach((task, index) => {
-      if (task.id === id) {
-        result = index;
-      }
-    });
-    return result;
-  }
+  // findIndex = (id) => {
+  //   const { tasks } = this.state;
+  //   let result = -1;
+  //   tasks.forEach((task, index) => {
+  //     if (task.id === id) {
+  //       result = index;
+  //     }
+  //   });
+  //   return result;
+  // }
 
   onDeleteItem = (id) => {
     const { tasks } = this.state;
-    const index = this.findIndex(id);
+    // const index = this.findIndex(id);
+    const index = findIndex(tasks, (task) => {
+      return task.id === id;
+    });
     if (index !== -1) {
       tasks.splice(index, 1);
       this.setState({
@@ -144,7 +154,10 @@ export class App extends Component {
 
   onUpdateItem = (id) => {
     const { tasks } = this.state;
-    const index = this.findIndex(id);
+    // const index = this.findIndex(id);
+    const index = findIndex(tasks, (task) => {
+      return task.id === id;
+    });
     const taskEditting = tasks[index];
     this.setState({
       taskEditting: taskEditting,
@@ -153,10 +166,9 @@ export class App extends Component {
   }
 
   onFilter = (filterName, filterStatus) => {
-    filterName = filterName.toLowerCase();
     filterStatus = parseInt(filterStatus, 10);
     this.setState({
-      filter: {
+      Filter: {
         name: filterName,
         status: filterStatus
       },
@@ -165,7 +177,7 @@ export class App extends Component {
 
   onSearch = (keyword) => {
     this.setState({
-      keyword: keyword.toLowerCase(),
+      keyword: keyword,
     })
   };
 
@@ -179,24 +191,27 @@ export class App extends Component {
   }
 
   render() {
-    let { tasks, isDisplayForm, taskEditting, filter, keyword, sort } = this.state;
-    if (filter) {
-      if (filter.name) {
-        tasks = tasks.filter((task) => {
-          return task.name.toLowerCase().indexOf(filter.name) !== -1;
+    let { tasks, isDisplayForm, taskEditting, Filter, keyword, sort } = this.state;
+
+    // tasks = tasks.filter((task) => {
+      // return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+    // });
+
+    tasks = filter(tasks, (task) => {
+      return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+    })
+
+    if (Filter) {
+      if (Filter.name) {
+        tasks = tasks.Filter((task) => {
+          return task.name.toLowerCase().indexOf(Filter.name.toLowerCase()) !== -1;
         })
       }
-      if (filter.status !== -1) {
-        tasks = tasks.filter((task) => {
-          return task.status === (filter.status === 0 ? false : true);
+      if (Filter.status !== -1) {
+        tasks = tasks.Filter((task) => {
+          return task.status === (Filter.status === 0 ? false : true);
         })
       }
-    };
-    
-    if (keyword) {
-      tasks = tasks.filter((task) => {
-        return task.name.toLowerCase().indexOf(keyword) !== -1;
-      });
     };
 
     if (sort.by==='name') {
