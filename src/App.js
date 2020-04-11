@@ -7,10 +7,10 @@ import TaskList from './components/TaskList';
 export class App extends Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
-       tasks: [],
-       isDisplayForm: false,
+      tasks: [],
+      isDisplayForm: false,
     }
   }
 
@@ -46,11 +46,11 @@ export class App extends Component {
   //   localStorage.setItem('tasks', JSON.stringify(tasks));
   // }
 
-  s4(){
-    return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
+  s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   }
 
-  generateID(){
+  generateID() {
     return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
   }
 
@@ -98,14 +98,27 @@ export class App extends Component {
     });
     return result;
   }
-  
+
+  onDeleteItem = (id) => {
+    const { tasks } = this.state;
+    const index = this.findIndex(id);
+    if (index !== -1) {
+      tasks.splice(index, 1);
+      this.setState({
+        tasks: tasks,
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      this.onCloseForm();
+    }
+  }
+
   render() {
     const { tasks, isDisplayForm } = this.state;
-    const elmTaskForm = isDisplayForm ? 
-      <TaskForm 
+    const elmTaskForm = isDisplayForm ?
+      <TaskForm
         onCloseForm={this.onCloseForm}
         onSubmit={this.onSubmit}
-      /> 
+      />
       : '';
     return (
       <div className="container-fluid">
@@ -117,8 +130,8 @@ export class App extends Component {
           {elmTaskForm}
 
           <div className={isDisplayForm ? "col-xs-12 col-sm-8 col-md-8 col-lg-8" : "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="btn btn-primary"
               onClick={this.onDisplayForm}
             >
@@ -135,9 +148,10 @@ export class App extends Component {
             {/* Search - Sort */}
             <Control />
             {/* List */}
-            <TaskList 
+            <TaskList
               tasks={tasks}
               onUpdateStatus={this.onUpdateStatus}
+              onDeleteItem={this.onDeleteItem}
             />
           </div>
 
