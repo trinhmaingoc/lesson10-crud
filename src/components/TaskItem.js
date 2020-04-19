@@ -20,6 +20,7 @@ export class TaskItem extends Component {
       <tr>
         <td> { index + 1 } </td>
         <td> { task.name } </td>
+        <td> { task.description } </td>
         <td className="text-center">
           <span 
             className={task.status ? "label label-danger status" : "label label-success status"}

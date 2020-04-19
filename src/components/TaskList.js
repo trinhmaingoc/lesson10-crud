@@ -7,6 +7,7 @@ export class TaskList extends Component {
   
     this.state = {
        filterName: '',
+       filterDescription: '',
        filterStatus: -1
     }
   }
@@ -17,6 +18,7 @@ export class TaskList extends Component {
     let value = target.type === 'checkbox' ? target.checked : target.value;
     this.props.onFilter(
       name === "filterName" ? value : this.state.filterName,
+      name === "filterDescription" ? value : this.state.filterDescription,
       name === "filterStatus" ? value : this.state.filterStatus
     );
     this.setState({
@@ -26,7 +28,7 @@ export class TaskList extends Component {
   
   render() {
     const { tasks } = this.props;
-    const { filterName, filterStatus } = this.state;
+    const { filterName, filterDescription, filterStatus } = this.state;
     const elmTasks = tasks.map((task, index) => (
       <TaskItem 
         key={index}
@@ -45,6 +47,7 @@ export class TaskList extends Component {
               <tr>
                 <th className="text-center">STT</th>
                 <th className="text-center">Tên</th>
+                <th className="text-left">Nghĩa</th>
                 <th className="text-center">Trạng Thái</th>
                 <th className="text-center">Hành Động</th>
               </tr>
@@ -58,6 +61,15 @@ export class TaskList extends Component {
                     className="form-control"
                     value={filterName}
                     name="filterName"
+                    onChange={this.onChange}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={filterDescription}
+                    name="filterDescription"
                     onChange={this.onChange}
                   />
                 </td>

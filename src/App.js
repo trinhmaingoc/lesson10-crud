@@ -15,6 +15,7 @@ export class App extends Component {
       taskEditting: null,
       filter: {
         name: '',
+        description: '',
         status: -1
       },
       keyword: '',
@@ -165,11 +166,12 @@ export class App extends Component {
     this.onOpenForm();
   }
 
-  onFilter = (filterName, filterStatus) => {
+  onFilter = (filterName, filterDescription, filterStatus) => {
     filterStatus = parseInt(filterStatus, 10);
     this.setState({
       filter: {
         name: filterName,
+        description: filterDescription,
         status: filterStatus
       },
     });
@@ -205,6 +207,11 @@ export class App extends Component {
       if (filter.name) {
         tasks = tasks.filter((task) => {
           return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1;
+        })
+      }
+      if (filter.description) {
+        tasks = tasks.filter((task) => {
+          return task.description.toLowerCase().indexOf(filter.description.toLowerCase()) !== -1;
         })
       }
       if (filter.status !== -1) {

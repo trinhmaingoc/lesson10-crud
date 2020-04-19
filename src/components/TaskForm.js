@@ -7,6 +7,7 @@ export class TaskForm extends Component {
     this.state = {
       id: '',
       name: '',
+      description: '',
       status: false,
     }
   }
@@ -16,6 +17,7 @@ export class TaskForm extends Component {
       this.setState({
         id: this.props.task.id,
         name: this.props.task.name,
+        description: this.props.task.description,
         status: this.props.task.status
       })
     }
@@ -27,6 +29,7 @@ export class TaskForm extends Component {
         this.setState({
           id: this.props.task.id,
           name: this.props.task.name,
+          description: this.props.description,
           status: this.props.task.status,
         })
       } else {
@@ -62,12 +65,13 @@ export class TaskForm extends Component {
     this.setState({
       id: '',
       name: '',
+      description: '',
       status: false,
     })
   }
 
   render() {
-    const { id, name, status } = this.state;
+    const { id, name, description, status } = this.state;
     return (
       <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
         {/* Form */}
@@ -90,6 +94,16 @@ export class TaskForm extends Component {
                   className="form-control"
                   name="name"
                   value={name}
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Nghĩa: </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="description"
+                  value={description}
                   onChange={this.onChange}
                 />
               </div>
